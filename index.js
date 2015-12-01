@@ -1,17 +1,19 @@
 var express = require('express');
 var app = express();
 
+var entries = [{firstName:'steve', lastName:'smith'},{firstName:'john', lastName:'doe'}];
+
 app.get('/', function (req, res) {
-  res.send('Hello World!');
+  var returning = [];
+for (var i = 0; i < entries.length; i++){
+  if(req.query.name === entries[i].firstName || req.query.name === entries[i].lastName){
+    returning.push(entries[i]);
+    console.log(returning);
+  }
+}
+  res.json(returning);
 });
 
-
-
-
-
-/* YOU DON'T HAVE TO CHANGE ANYTHING BELOW THIS LINE :) */
-
-// Boilerplate code to start up the web server
 var server = app.listen(process.env.PORT, process.env.IP, function () {
   var host = server.address().address;
   var port = server.address().port;
